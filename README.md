@@ -2,7 +2,7 @@
 
 Documentation site for the [Prisma](https://github.com/prisma-proxy/prisma) encrypted proxy system. Built with [Docusaurus 3](https://docusaurus.io/) with English and Chinese (Simplified) locales.
 
-**Live site**: [yamimega.github.io/prisma](https://yamimega.github.io/prisma/)
+**Live site**: [prisma-proxy.github.io/prisma-docs](https://prisma-proxy.github.io/prisma-docs/)
 
 ## Content
 

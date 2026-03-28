@@ -14,8 +14,8 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://yamimega.github.io/',
-  baseUrl: '/prisma',
+  url: 'https://prisma-proxy.github.io/',
+  baseUrl: '/prisma-docs',
 
   onBrokenLinks: 'warn',
 
