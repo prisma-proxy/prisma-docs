@@ -2,7 +2,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-const repoUrl = 'https://github.com/prisma-proxy/prisma';
+const repoUrl = 'https://github.com/prisma-proxy/prisma-docs';
+const coreRepoUrl = 'https://github.com/prisma-proxy/prisma';
 
 const config: Config = {
   title: 'Prisma Proxy',
@@ -53,7 +54,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: `${repoUrl}/edit/master/docs/`,
+          editUrl: `${repoUrl}/edit/master/`,
           showLastUpdateTime: true,
           lastVersion: 'current',
           versions: {
@@ -76,7 +77,7 @@ const config: Config = {
         path: 'guide',
         routeBasePath: 'guide',
         sidebarPath: './sidebarsGuide.ts',
-        editUrl: `${repoUrl}/edit/master/docs/`,
+        editUrl: `${repoUrl}/edit/master/`,
       },
     ],
     [
@@ -86,7 +87,7 @@ const config: Config = {
         path: 'dev',
         routeBasePath: 'dev',
         sidebarPath: './sidebarsDev.ts',
-        editUrl: `${repoUrl}/edit/master/docs/`,
+        editUrl: `${repoUrl}/edit/master/`,
       },
     ],
   ],
@@ -134,7 +135,7 @@ const config: Config = {
           position: 'right',
         },
         {
-          href: repoUrl,
+          href: coreRepoUrl,
           position: 'right',
           className: 'header-github-link',
           'aria-label': 'GitHub repository',
@@ -196,7 +197,7 @@ const config: Config = {
           items: [
             {
               label: 'GitHub',
-              href: repoUrl,
+              href: coreRepoUrl,
             },
           ],
         },

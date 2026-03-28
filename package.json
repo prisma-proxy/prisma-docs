@@ -2,6 +2,9 @@
   "name": "prisma-docs",
   "version": "0.0.0",
   "private": true,
+  "repository": "https://github.com/prisma-proxy/prisma-docs",
+  "homepage": "https://github.com/prisma-proxy/prisma-docs",
+  "bugs": "https://github.com/prisma-proxy/prisma-docs/issues",
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
