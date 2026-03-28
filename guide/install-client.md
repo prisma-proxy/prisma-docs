@@ -74,7 +74,7 @@ Download from [GitHub Releases](https://github.com/prisma-proxy/prisma/releases/
 
 ```bash
 prisma --version
-# Expected: prisma 2.1.4
+# Expected: prisma 2.28.0
 ```
 
 ## Next step

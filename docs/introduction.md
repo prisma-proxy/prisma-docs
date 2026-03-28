@@ -5,7 +5,7 @@ slug: /introduction
 
 # Introduction
 
-Prisma is a next-generation encrypted proxy infrastructure suite built in Rust. It implements the **PrismaVeil v5** wire protocol — combining modern cryptography (including post-quantum hybrid key exchange), eight transport options, and advanced anti-censorship features. Version **2.26.0** ships with a subscription system overhaul, improved server resilience, an upgraded connection map, GUI performance and stability improvements, and many more production-grade features.
+Prisma is a next-generation encrypted proxy infrastructure suite built in Rust. It implements the **PrismaVeil v5** wire protocol — combining modern cryptography (including post-quantum hybrid key exchange), eight transport options, and advanced anti-censorship features. Version **2.28.0** ships with a subscription system overhaul, improved server resilience, an upgraded connection map, GUI performance and stability improvements, and many more production-grade features.
 
 ## Features
 
@@ -145,7 +145,18 @@ graph LR
     C --> D[ServerState]
 ```
 
-## What's New in 2.26.0
+## What's New in 2.28.0
+
+- **TUN mode fixed** — full OS routing setup (split-route trick), DNS response construction, UDP relay, platform-specific support (wintun on Windows, utun on macOS, /dev/net/tun on Linux)
+- **GUI proxy mode polish** — SOCKS5 always-on, TUN/Per-App/System Proxy toggleable on Home page, Per-App auto-enables TUN, removed duplicate SplitTunneling section
+- **GUI update check** — now checks prisma-gui releases (not CLI repo), platform-specific installer detection
+- **Console connection map fix** — countries now show colored fills (fixed numeric→alpha2 ISO code mapping), development mock data for visual testing
+- **Performance** — connection pool RwLock + AtomicUsize, React.memo on list rows and SpeedTestChart, memoized mode values, tick interval optimization
+- **Platform routing** — Windows PowerShell gateway detection, macOS correct P2P interface setup, DNS resolved before TUN routes to avoid chicken-and-egg
+- **Bundled wintun.dll** — Windows GUI ships wintun driver, auto-copied on setup
+- **Elevation check** — Windows admin check via TOKEN_ELEVATION (was hardcoded false)
+
+## What's New in 2.27.0
 
 - **Subscription system overhaul** — invite redemption page (`/invite/[token]`), plan edit/update UI, expiry date picker for codes and invites, advanced permission fields (port forwarding, UDP, connections, destinations, quota period), auto-refresh queries, improved delete confirmations
 - **Error handling** — HTTP status code checking (410/409/404) replaces fragile string matching in redeem page
