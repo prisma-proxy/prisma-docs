@@ -5,7 +5,7 @@ slug: /introduction
 
 # Introduction
 
-Prisma is a next-generation encrypted proxy infrastructure suite built in Rust. It implements the **PrismaVeil v5** wire protocol — combining modern cryptography (including post-quantum hybrid key exchange), eight transport options, and advanced anti-censorship features. Version **2.28.0** ships with a subscription system overhaul, improved server resilience, an upgraded connection map, GUI performance and stability improvements, and many more production-grade features.
+Prisma is a next-generation encrypted proxy infrastructure suite built in Rust. It implements the **PrismaVeil v5** wire protocol — combining modern cryptography (including post-quantum hybrid key exchange), eight transport options, and advanced anti-censorship features. Version **2.32.0** ships with a subscription system overhaul, improved server resilience, an upgraded connection map, GUI performance and stability improvements, and many more production-grade features.
 
 ## Features
 
@@ -145,16 +145,18 @@ graph LR
     C --> D[ServerState]
 ```
 
-## What's New in 2.28.0
+## What's New in 2.32.0
 
-- **TUN mode fixed** — full OS routing setup (split-route trick), DNS response construction, UDP relay, platform-specific support (wintun on Windows, utun on macOS, /dev/net/tun on Linux)
-- **GUI proxy mode polish** — SOCKS5 always-on, TUN/Per-App/System Proxy toggleable on Home page, Per-App auto-enables TUN, removed duplicate SplitTunneling section
-- **GUI update check** — now checks prisma-gui releases (not CLI repo), platform-specific installer detection
-- **Console connection map fix** — countries now show colored fills (fixed numeric→alpha2 ISO code mapping), development mock data for visual testing
-- **Performance** — connection pool RwLock + AtomicUsize, React.memo on list rows and SpeedTestChart, memoized mode values, tick interval optimization
-- **Platform routing** — Windows PowerShell gateway detection, macOS correct P2P interface setup, DNS resolved before TUN routes to avoid chicken-and-egg
-- **Bundled wintun.dll** — Windows GUI ships wintun driver, auto-copied on setup
-- **Elevation check** — Windows admin check via TOKEN_ELEVATION (was hardcoded false)
+- **Mobile VPN support** — full Android and iOS VPN integration via Tauri mobile plugin (`tauri-plugin-vpn`). Android shows the system VPN permission dialog via `VpnService.prepare()`, iOS uses `NETunnelProviderManager` for tunnel management
+- **Android VPN service** — `PrismaVpnService` creates TUN interface and passes fd to Rust via JNI. Foreground notification, graceful stop, permission revocation handling
+- **iOS VPN service** — `PacketTunnelProvider` with `NEPacketTunnelNetworkSettings`, TUN fd extraction, C FFI bridge to Rust engine
+- **Mobile connection flow** — check permission → request permission (system dialog) → start VPN service → TUN fd handoff → connect. Auto-stop VPN service on disconnect
+- **TUN fd bridge fix** — `prisma_set_tun_fd()` now calls `prisma_client::set_mobile_tun_fd()` so the TUN device creation actually receives the fd on Android/iOS
+- **Desktop-only call guards** — `setSystemProxy`, `clearSystemProxy`, `refreshTrayProfiles`, tray stats updates gated with `isDesktopSync()` to prevent no-op calls on mobile
+- **Mobile UI polish** — hide DNS, Logging, TUN, Routing settings on mobile. Hide proxy ports in VPN mode. Auto-reconnect when switching connection mode
+- **GUI update check fix** — uses GUI's own `CARGO_PKG_VERSION` for version comparison instead of prisma-core's, preventing false update notifications
+- **Platform store** — synchronous `isMobileSync()` / `isDesktopSync()` for callbacks and event handlers
+- **Shared mobile helpers** — `getEffectiveModes()`, `startMobileVpnIfNeeded()`, `stopMobileVpnIfNeeded()` deduplicate connection + auto-reconnect logic
 
 ## What's New in 2.27.0
 

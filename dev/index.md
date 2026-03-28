@@ -7,7 +7,7 @@ slug: /
 
 Comprehensive internal reference for the Prisma proxy system -- architecture, module APIs, wire protocol, configuration fields, CLI commands, management endpoints, FFI functions, and extension recipes.
 
-**Workspace version:** v2.28.0 | **Protocol:** PrismaVeil v5 | **Rust edition:** 2021
+**Workspace version:** v2.32.0 | **Protocol:** PrismaVeil v5 | **Rust edition:** 2021
 
 ---
 

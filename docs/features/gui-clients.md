@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 # GUI Clients
 
 :::info Repository Split
-As of v2.28.0, the GUI desktop/mobile client has moved to its own repository: **[prisma-proxy/prisma-gui](https://github.com/prisma-proxy/prisma-gui)**. It uses a git submodule for the core Rust crates. All GUI development, issues, and releases now live in that repo.
+As of v2.32.0, the GUI desktop/mobile client has moved to its own repository: **[prisma-proxy/prisma-gui](https://github.com/prisma-proxy/prisma-gui)**. It uses a git submodule for the core Rust crates. All GUI development, issues, and releases now live in that repo.
 :::
 
 Prisma ships GUI clients for all major platforms. The primary desktop client is the **Prisma GUI** ([prisma-proxy/prisma-gui](https://github.com/prisma-proxy/prisma-gui)), a cross-platform Tauri 2 + React application that runs on Windows, macOS, Linux, Android, and iOS. It links against **prisma-ffi**, a C-ABI shared library built from the same Rust codebase as the CLI.
