@@ -7,7 +7,7 @@ slug: /
 
 Comprehensive internal reference for the Prisma proxy system -- architecture, module APIs, wire protocol, configuration fields, CLI commands, management endpoints, FFI functions, and extension recipes.
 
-**Workspace version:** v2.1.4 | **Protocol:** PrismaVeil v5 | **Rust edition:** 2021
+**Workspace version:** v2.28.0 | **Protocol:** PrismaVeil v5 | **Rust edition:** 2021
 
 ---
 
@@ -51,6 +51,37 @@ graph TD
 | **prisma-cli** | CLI binary (clap 4): server/client runners, management commands, daemon mode, web console, diagnostics |
 | **prisma-mgmt** | Management API (axum): REST + WebSocket endpoints, auth middleware, Prometheus export |
 | **prisma-ffi** | C FFI shared library for GUI/mobile: lifecycle, profiles, QR, system proxy, auto-update, per-app proxy, proxy groups |
+
+---
+
+## Multi-Repository Layout
+
+The Prisma project spans four repositories:
+
+| Repository | Purpose | Stack |
+|------------|---------|-------|
+| [prisma](https://github.com/prisma-proxy/prisma) | Core monorepo — all Rust crates, CLI, server | Rust |
+| [prisma-gui](https://github.com/prisma-proxy/prisma-gui) | Desktop/mobile client | Tauri 2 + React 19 |
+| [prisma-console](https://github.com/prisma-proxy/prisma-console) | Web management dashboard | Next.js 15 |
+| [prisma-docs](https://github.com/prisma-proxy/prisma-docs) | This documentation site | Docusaurus 4 |
+
+The GUI uses the core monorepo as a git submodule for FFI/core path dependencies.
+
+---
+
+## Development Prerequisites
+
+| Tool | Version | Purpose |
+|------|---------|---------|
+| Rust | stable (1.80+) | Core, server, client, FFI |
+| Node.js | 22+ | GUI frontend, console, docs |
+| npm | 10+ | Package management |
+| Git | 2.30+ | Version control, submodules |
+
+Optional:
+- **Docker** — for container builds and testing
+- **cargo-nextest** — faster test runner (`cargo install cargo-nextest`)
+- **cargo-fuzz** — for fuzz testing (`cargo install cargo-fuzz`)
 
 ---
 

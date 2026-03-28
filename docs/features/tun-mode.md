@@ -265,3 +265,39 @@ exclude_routes = ["<server-ip>/32"]
 ### DNS not resolving
 
 Ensure `dns` is set to `"fake"` or `"tunnel"`. With `dns = "fake"`, applications resolve domains to virtual IPs in the `198.18.0.0/15` range — this is expected behavior.
+
+---
+
+## What's New in v2.28
+
+### OS Routing (Automatic)
+
+TUN mode now automatically configures OS routing when activated:
+
+- **Split-route trick**: Adds `0.0.0.0/1` + `128.0.0.0/1` routes through the TUN device, avoiding replacement of the system's default gateway
+- **Server bypass**: The proxy server's IP is automatically excluded from TUN routes to prevent routing loops
+- **RAII cleanup**: All routing changes are automatically reversed when disconnecting (the `TunRouteGuard` ensures cleanup even on crash)
+
+### DNS Response Construction
+
+DNS queries captured by TUN are now properly handled:
+
+- **Fake DNS mode** (default): Assigns fake IPs from a reserved pool, constructs DNS A-record responses, and sends them back through TUN
+- **Tunnel/Smart/Direct modes**: Resolves domains via configured upstream DNS, then returns the response through TUN
+- DNS response packets include valid IPv4 headers with correct checksums
+
+### UDP Relay
+
+Non-DNS UDP traffic is now relayed through the encrypted tunnel (previously only logged). Each UDP datagram is sent through a tunnel connection with a 5-second response timeout.
+
+### Platform Support
+
+| Platform | Driver | Admin Required | Notes |
+|----------|--------|---------------|-------|
+| Windows | Wintun (bundled) | Yes | wintun.dll automatically placed next to exe |
+| macOS | utun kernel | Yes (sudo) | Point-to-point interface with 10.0.85.1/10.0.85.254 |
+| Linux | /dev/net/tun | CAP_NET_ADMIN | Standard kernel TUN driver |
+
+### GUI Integration
+
+In the desktop GUI, TUN mode is controlled via the **proxy mode toggles** on the Home page (not a separate settings toggle). Enabling Per-App mode automatically enables TUN. The GUI checks for administrator privileges before activating TUN.

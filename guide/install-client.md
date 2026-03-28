@@ -38,19 +38,17 @@ graph TD
 
 ## Option 1: prisma-gui (Desktop App)
 
-### Windows
+### Desktop GUI
 
-Download `prisma-gui-windows-x64-setup.exe` from [GitHub Releases](https://github.com/prisma-proxy/prisma/releases/latest) and run the installer.
+Download the latest release from [prisma-gui releases](https://github.com/prisma-proxy/prisma-gui/releases):
 
-### macOS
+| Platform | Installer | Portable |
+|----------|-----------|----------|
+| Windows x64 | `.exe` setup or `.msi` | Standalone `.exe` |
+| macOS Universal | `.dmg` (Intel + Apple Silicon) | — |
+| Linux x64 | `.AppImage`, `.deb`, `.rpm` | Standalone binary |
 
-Download `prisma-gui-macos.dmg`, open it, and drag Prisma to Applications.
-
-### Linux
-
-**Ubuntu/Debian:** `sudo dpkg -i prisma-gui_2.1.4_amd64.deb`
-
-**AppImage:** `chmod +x prisma-gui-2.1.4.AppImage && ./prisma-gui-2.1.4.AppImage`
+> **TUN mode note**: On Windows, the GUI bundles `wintun.dll` automatically. On macOS/Linux, run with elevated privileges for TUN support.
 
 ## Option 2: prisma CLI
 

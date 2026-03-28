@@ -155,3 +155,58 @@ enabled = true     # Capture all system traffic
 ## Next step
 
 Everything configured! Head to [Your First Connection](./first-connection.md).
+
+---
+
+## TUN Mode
+
+TUN mode captures **all system traffic** through a virtual network interface, routing it through the Prisma tunnel. This is the most comprehensive proxy mode — no app configuration needed.
+
+### Enabling TUN Mode
+
+In the **GUI**: Toggle "TUN" in the proxy modes on the Home page.
+
+In the **CLI** config:
+```toml
+[tun]
+enabled = true
+device_name = "prisma-tun0"  # or "utun0" on macOS
+mtu = 1500
+include_routes = ["0.0.0.0/0"]  # all traffic
+exclude_routes = ["192.168.0.0/16"]  # optional: bypass local network
+```
+
+### Requirements
+
+- **Windows**: Run as Administrator (wintun.dll is bundled with the GUI)
+- **macOS**: Run with `sudo` (uses kernel utun interface)
+- **Linux**: Requires `CAP_NET_ADMIN` capability
+
+### DNS Modes with TUN
+
+TUN mode works best with **Fake DNS** (the default when TUN is active):
+
+| Mode | How it works | Best for |
+|------|-------------|----------|
+| **Fake** | Assigns fake IPs from a reserved pool; maps back to domains in the tunnel | Most users (default) |
+| **Tunnel** | Forwards all DNS through the encrypted tunnel | Maximum privacy |
+| **Smart** | Blocked domains via tunnel, others direct | Selective routing |
+| **Direct** | No DNS processing | Advanced configurations |
+
+---
+
+## Per-App Proxy
+
+Per-App mode lets you choose which applications route through the proxy. It requires TUN mode (automatically enabled when Per-App is toggled on).
+
+### Quick Setup
+
+1. Toggle **Per-App** in the proxy modes on the Home page
+2. Go to the **Per-App** page in the sidebar
+3. Choose **Include** mode (only selected apps proxied) or **Exclude** mode (all except selected)
+4. Click **Refresh** to see running applications
+5. Select the apps you want and click **Apply**
+
+### Presets
+
+Save your app selections as named presets for quick switching between configurations (e.g., "Work" with browser + Slack, "Gaming" with Steam excluded).
